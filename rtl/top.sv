@@ -16,6 +16,7 @@ parameter uart_rate = 19200;
 parameter uart_oversample = 15;
 parameter uart_divider = int'(osc_freq * 1e6 / (uart_oversample + 1) / uart_rate) - 1;
 parameter matrix_freq = 25e6;
+parameter pwm_depth = 8;
 
 parameter width = 64;
 parameter scan_bit = 4;
@@ -115,7 +116,8 @@ ram ram2(.WrAddress(recv_addr),
 
 matrix #(.divider(),
          .length(width),
-         .scan_bit(scan_bit))
+         .scan_bit(scan_bit),
+		 .pwm_depth(pwm_depth))
 matrix(.addr(send_addr),
        .data1(send_data1),
        .data2(send_data2),

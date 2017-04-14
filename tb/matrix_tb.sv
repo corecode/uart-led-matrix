@@ -11,7 +11,7 @@ module matrix_tb;
    logic [scan-1:0] select;
 
 initial
-  #10000 $finish;
+  #100000 $finish;
 
 initial begin
    clk      = 0;

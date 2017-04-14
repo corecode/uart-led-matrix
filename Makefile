@@ -1,6 +1,6 @@
-SRCS=	top.sv uart.sv receive.sv matrix.sv send.sv matrix-test.sv
+SRCS=	top.sv uart.sv receive.sv matrix.sv send.sv
 PLATFORM_SRCS=	machxo2/platform.sv
-TBS=	uart_tb.sv receive_tb.sv matrix_tb.sv send_tb.sv top_tb.sv matrix_test_tb.sv
+TBS=	uart_tb.sv receive_tb.sv matrix_tb.sv send_tb.sv top_tb.sv
 
 _srcs= $(addprefix rtl/,${SRCS})
 _platform_srcs= $(addprefix rtl/,${PLATFORM_SRCS})
