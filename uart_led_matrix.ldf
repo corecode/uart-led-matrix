@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BaliProject version="3.2" title="uart_led_matrix" device="LCMXO2-7000HE-4TG144C" default_implementation="impl1">
+    <Options/>
+    <Implementation title="impl1" dir="impl1" description="impl1" synthesis="synplify" default_strategy="Strategy1">
+        <Options/>
+        <Source name="rtl/por.sv" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="rtl/uart.sv" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="rtl/top.sv" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="rtl/machxo2/platform.sv" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="rtl/machxo2/pll.v" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="rtl/matrix.sv" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="rtl/machxo2/ram.lpc" type="LPC_Module" type_short="LPC">
+            <Options/>
+        </Source>
+        <Source name="rtl/machxo2/ram.v" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="rtl/receive.sv" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="impl1/impl1.xcf" type="Programming Project File" type_short="Programming">
+            <Options/>
+        </Source>
+        <Source name="uart_led_matrix.lpf" type="Logic Preference" type_short="LPF">
+            <Options/>
+        </Source>
+    </Implementation>
+    <Strategy name="Strategy1" file="uart_led_matrix1.sty"/>
+</BaliProject>
