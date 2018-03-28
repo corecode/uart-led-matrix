@@ -18,6 +18,7 @@ module matrix
    parameter int bitdepth  = 8;
    parameter int scan_bit  = 3;
    parameter int pwm_depth  = 4;
+   parameter int pwm_inner_depth = 3;
 
    localparam int addrmax = length * (1 << scan_bit) - 1;
 
@@ -36,11 +37,13 @@ module matrix
    logic [$clog2(length)-1:0]           pos;
 
    logic [pwm_depth-1:0]                pwm_cycle;
+   logic [pwm_depth-pwm_inner_depth-1:0] pwm_outer_cycle;
+   logic [pwm_inner_depth-1:0]           pwm_inner_cycle;
+
    logic [scan_bit-1:0]                 row, select_next;
 
    logic                                new_cycle;
    logic                                sclk_rising, sclk_falling;
-   logic                                pwm_cycle_done;
 
 assign new_cycle = cycle == divider;
 
@@ -82,15 +85,22 @@ endgenerate
    logic                   last_pos;
 
 assign last_pos = pos == length - 1;
-assign pwm_cycle_done = pwm_cycle == ((1 << pwm_depth) - 2);
+
+   logic                   pwm_inner_cycle_done;
+   logic                   pwm_outer_cycle_last;
+
+assign pwm_outer_cycle_last = pwm_outer_cycle == ((1 << (pwm_depth - pwm_inner_depth)) - 1);
+assign pwm_inner_cycle_done = pwm_inner_cycle == (pwm_outer_cycle_last ? ((1 << pwm_inner_depth) - 2) : ((1 << pwm_inner_depth) - 1));
+assign pwm_cycle = {pwm_inner_cycle[pwm_inner_depth-1], pwm_outer_cycle, pwm_inner_cycle[pwm_inner_depth-2:0]};
 
 always_ff @(posedge clk)
   if (reset) begin
-     pos        <= 0;
-     addr       <= 0;
-     addr_start <= 0;
-     pwm_cycle  <= 0;
-     row        <= 0;
+     pos             <= 0;
+     addr            <= 0;
+     addr_start      <= 0;
+     pwm_inner_cycle <= 0;
+     pwm_outer_cycle <= 0;
+     row             <= 0;
   end
   else if (new_cycle) begin
      pos  <= pos + 1;
@@ -98,17 +108,18 @@ always_ff @(posedge clk)
 
      if (last_pos) begin
         pos       <= 0;
-        pwm_cycle <= pwm_cycle + 1;
+        pwm_inner_cycle <= pwm_inner_cycle + 1;
 
-        if (!pwm_cycle_done)
+        if (!pwm_inner_cycle_done)
           addr     <= addr_start;
         else begin
-           pwm_cycle   <= 0;
+           pwm_inner_cycle   <= 0;
            row <= row + 1;
            if (addr == addrmax) begin
-              addr        <= 0;
-              addr_start  <= 0;
-              row <= 0;
+              addr            <= 0;
+              addr_start      <= 0;
+              row             <= 0;
+              pwm_outer_cycle <= pwm_outer_cycle + 1;
            end else begin
               addr_start <= addr + 1;
            end

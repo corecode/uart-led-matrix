@@ -2,7 +2,7 @@
 <BaliProject version="3.2" title="uart_led_matrix" device="LCMXO2-7000HE-4TG144C" default_implementation="impl1">
     <Options/>
     <Implementation title="impl1" dir="impl1" description="impl1" synthesis="synplify" default_strategy="Strategy1">
-        <Options/>
+        <Options HDL_PARAM="osc_freq=88.67; osc_freq_str=&quot;88.67&quot;; uart_rate=1000000; uart_oversample=10" top="top"/>
         <Source name="rtl/por.sv" type="Verilog" type_short="Verilog">
             <Options/>
         </Source>
@@ -24,13 +24,52 @@
         <Source name="rtl/machxo2/ram.lpc" type="LPC_Module" type_short="LPC">
             <Options/>
         </Source>
-        <Source name="rtl/machxo2/ram.v" type="Verilog" type_short="Verilog">
+        <Source name="rtl/receive.sv" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="impl1/impl1-ram.xcf" type="Programming Project File" type_short="Programming" excluded="TRUE">
+            <Options/>
+        </Source>
+        <Source name="impl1/impl1.xcf" type="Programming Project File" type_short="Programming">
+            <Options/>
+        </Source>
+        <Source name="uart_led_matrix.lpf" type="Logic Preference" type_short="LPF">
+            <Options/>
+        </Source>
+    </Implementation>
+    <Implementation title="impl_ghost_test" dir="impl_ghost_test" description="impl_ghost_test" synthesis="synplify" default_strategy="Strategy1">
+        <Options HDL_PARAM="osc_freq=88.67; osc_freq_str=&quot;88.67&quot;; uart_rate=115200" top="top"/>
+        <Source name="rtl/por.sv" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="rtl/uart.sv" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="rtl/top.sv" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="rtl/machxo2/platform.sv" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="rtl/machxo2/pll.v" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="rtl/matrix.sv" type="Verilog" type_short="Verilog" excluded="TRUE">
+            <Options/>
+        </Source>
+        <Source name="rtl/machxo2/ram.lpc" type="LPC_Module" type_short="LPC">
             <Options/>
         </Source>
         <Source name="rtl/receive.sv" type="Verilog" type_short="Verilog">
             <Options/>
         </Source>
-        <Source name="impl1/impl1.xcf" type="Programming Project File" type_short="Programming">
+        <Source name="rtl/matrix-test.sv" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="impl_ghost_test/impl1-ram.xcf" type="Programming Project File" type_short="Programming" excluded="TRUE">
+            <Options/>
+        </Source>
+        <Source name="impl_ghost_test/impl1.xcf" type="Programming Project File" type_short="Programming">
             <Options/>
         </Source>
         <Source name="uart_led_matrix.lpf" type="Logic Preference" type_short="LPF">
